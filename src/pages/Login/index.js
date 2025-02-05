@@ -1,15 +1,23 @@
 import { Card } from "antd";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input,message } from "antd";
 import "./index.scss";
 import logo from "@/assets/logo.png"
-const Login = () => {
-  const onFinish = (values) => {
+import { useDispatch } from "react-redux";
+import { fetchLogin } from "@/store/modules/user";
+import { useNavigate } from "react-router-dom";
+const Login =  () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const onFinish = async (values) => {
     console.log("Success:", values);
+    await dispatch(fetchLogin(values));
+    navigate("/");
+    message.success("登陆成功");
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-  const logoUrl = "../"
+  
   return (
     <div className="login">
       <div className="loginContainer">
@@ -30,7 +38,7 @@ const Login = () => {
             validateTrigger="onBlur"
           >
             <Form.Item
-              name="username"
+              name="mobile"
               rules={[
                 {
                   required: true,
@@ -40,13 +48,13 @@ const Login = () => {
                   pattern: /^1[3-9]\d{9}$/,
                   message: "手机号码格式不对",
                 },
-                
+
               ]}
             >
               <Input size="large" placeholder="请输入手机号"></Input>
             </Form.Item>
             <Form.Item
-              name="password"
+              name="code"
               rules={[
                 {
                   required: true,
