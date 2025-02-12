@@ -27,7 +27,7 @@ const Login =  () => {
             height: "100%",
           }}
         >
-          <div className="logo">
+          <div className="logoContainer">
             <img src={logo} alt="" />
           </div>
           <Form
