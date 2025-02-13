@@ -8,5 +8,6 @@ module.exports = {
             "stream": require.resolve("stream-browserify"),
             "url": require.resolve("url/")
         }
-    }
+    },
+    devtool: 'source-map', // 确保生成完整的 source map
 };
